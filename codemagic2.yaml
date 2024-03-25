@@ -19,8 +19,7 @@ workflows:
         script: cd android && chmod +x ./gradlew
       - name: Build apk release project (APK) - ${{ env.main_project_module }} module
         script: cd android && ./gradlew assembleRelease
-      - name: Build app bundle release (AAB) - ${{ env.main_project_module }} module
-        script: cd android && ./gradlew ${{ env.main_project_module }}:bundleRelease
+
     artifacts:
       - android/app/build/outputs/apk/release/*.apk
       - android/app/build/outputs/bundle/release/*.aab
