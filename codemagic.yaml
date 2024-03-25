@@ -16,8 +16,11 @@ workflows:
                 echo "sdk.dir=$ANDROID_SDK_ROOT" > "$CM_BUILD_DIR/android/local.properties"
             - name: Build Android release
               script: |
+                curl -s "https://get.sdkman.io" | bash
+                source "$HOME/.sdkman/bin/sdkman-init.sh"
+                sdk install java 17.0.1-zulu
+                export JAVA_HOME=~/.sdkman/candidates/java/17.0.1-zulu/
                 cd android
-                chmod +x gradlew
                 ./gradlew assembleRelease
         artifacts:
             - android/app/build/outputs/apk/release/*.apk
