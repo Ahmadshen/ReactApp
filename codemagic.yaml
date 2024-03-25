@@ -1,28 +1,28 @@
 workflows:
-    react-native-android:
-        name: React Native Android
-        max_build_duration: 120
-        instance_type: mac_mini_m1
-        environment:
-              java: 17
-
-            scripts:
-              - name: Install Node.js and npm
-                script: |
-                  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-                  brew install node
-              - name: Install dependencies
-                script: |
-                  npm install
-              - name: Set Android SDK location
-                script: |
-                  echo "sdk.dir=$ANDROID_SDK_ROOT" > "$CM_BUILD_DIR/android/local.properties"
-              - name: Build Android release
-                script: |
-                  curl -s "https://get.sdkman.io" | bash
-                  sdk install java 17.0.1-zulu
-                  export JAVA_HOME=~/.sdkman/candidates/java/17.0.1-zulu/
-                  cd android
-                  ./gradlew assembleRelease
-          artifacts:
-            - android/app/build/outputs/apk/release/*.apk
+  react-native-android:
+    name: React Native Android
+    max_build_duration: 120
+    instance_type: mac_mini_m1
+    environment:
+      java: 17
+    scripts:
+      - name: Install Node.js and npm
+        script: |
+          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+          brew install node
+      - name: Install dependencies
+        script: |
+          npm install
+      - name: Set Android SDK location
+        script: |
+          echo "sdk.dir=$ANDROID_SDK_ROOT" > "$CM_BUILD_DIR/android/local.properties"
+      - name: Build Android release
+        script: |
+          curl -s "https://get.sdkman.io" | bash
+          sdk install java 17.0.1-zulu
+          export JAVA_HOME=~/.sdkman/candidates/java/17.0.1-zulu/
+          cd android
+          ./gradlew assembleRelease
+          
+    artifacts:
+      - android/app/build/outputs/apk/release/*.apk
