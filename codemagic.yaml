@@ -6,8 +6,8 @@ workflows:
         scripts:
             - name: Install Node.js and npm
               script: |
-                curl -sL https://deb.nodesource.com/setup_14.x | bash -
-                apt-get install -y nodejs
+                /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+                brew install node
             - name: Install dependencies
               script: |
                 npm install
@@ -18,7 +18,6 @@ workflows:
               script: |
                 cd android
                 chmod +x gradlew
-                apt-get update && apt-get install -y build-essential
                 ./gradlew assembleRelease
         artifacts:
             - android/app/build/outputs/apk/release/*.apk
