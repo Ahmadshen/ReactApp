@@ -19,10 +19,11 @@ workflows:
       - name: Build Android release
         script: |
           curl -s "https://get.sdkman.io" | bash
-          sdk install java 17.0.1-zulu
-          export JAVA_HOME=~/.sdkman/candidates/java/17.0.1-zulu/
+          source "$HOME/.sdkman/bin/sdkman-init.sh"
+          sdk version
+          sdk list java | grep 17.0.1-zulu || sdk install java 17.0.1-zulu
+          JAVA_HOME = /usr/lib/jvm/java-1.17.0-openjdk-amd64
           cd android
           ./gradlew assembleRelease
-          
     artifacts:
       - android/app/build/outputs/apk/release/*.apk
