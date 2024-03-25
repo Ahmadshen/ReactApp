@@ -4,7 +4,13 @@ workflows:
         max_build_duration: 120
         instance_type: mac_mini_m1
         scripts:
-          
+            - name: Install Node.js and npm
+              script: |
+                curl -sL https://deb.nodesource.com/setup_14.x | bash -
+                apt-get install -y nodejs
+            - name: Install dependencies
+              script: |
+                npm install
             - name: Set Android SDK location
               script: |
                 echo "sdk.dir=$ANDROID_SDK_ROOT" > "$CM_BUILD_DIR/android/local.properties"
