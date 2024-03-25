@@ -8,9 +8,14 @@ workflows:
             PACKAGE_NAME: "io.codemagic.sample.reactnative" # <-- Put your package name here e.g. com.domain.myapp
           node: v19.7.0
         scripts:
-            - name: Install npm dependencies
+            - name: Install npm dependencies and required tools
               script: |
                 npm install
+                brew install gradle
+                brew install openjdk@17
+            - name: Set JAVA_HOME
+              script: |
+                export JAVA_HOME=/usr/local/opt/openjdk@17
             - name: Set Android SDK location
               script: |
                 echo "sdk.dir=$ANDROID_SDK_ROOT" > "$CM_BUILD_DIR/android/local.properties"
