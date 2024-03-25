@@ -11,6 +11,8 @@ workflows:
             - name: Build Android release
               script: |
                 cd android
-                gradle assembleRelease
+                chmod +x gradlew
+                apt-get update && apt-get install -y build-essential
+                ./gradlew assembleRelease
         artifacts:
             - android/app/build/outputs/apk/release/*.apk
