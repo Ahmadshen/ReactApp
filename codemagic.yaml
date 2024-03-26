@@ -5,6 +5,8 @@ workflows:
     instance_type: mac_mini_m1
     environment:
       java: 17
+      android_signing:
+        - keystore_reference
     scripts:
       - name: Install Node.js and npm
         script: |
