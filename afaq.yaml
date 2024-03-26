@@ -16,6 +16,7 @@ workflows:
         script: brew install node
       - name: Install yarn
         script: npm install yarn
+      - name: Install dependencies  
         script: cd android && chmod +x ./gradlew
       - name: Build apk release project (APK) - ${{ env.main_project_module }} module
         script: cd android && ./gradlew assembleRelease
